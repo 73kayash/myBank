@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+</head>
+<body>
+<table border="1" bgcolor="#f5f5dc">
+    <thead>
+    <tr>
+        <th> Отправитель</th>
+        <th> Получатель</th>
+        <th> Cумма </th>
+        <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--/*@thymesVar id="payment" type="irlix.task.bank.models.dto.payment.PaymentDto"*/-->
+    <form th:method="POST" action=# th:object="${payment}" >
+        <input type="hidden" th:field="*{sender}">
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td th:utext="payment.getSender().getId()"></td>
+                        <td th:utext="payment.getSender().getName()">NAME</td>
+                        <td th:utext="payment.getSender().getNumber()">NUMBER</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <select th:field="*{recipient_id}">
+                    <option th:each="user : ${payment.getUsers()}" th:value="user.getId()" th:utext="${user.getName()} + ' ' + ${user.getNumber()}"></option>
+                </select>
+            </td>
+            <td><input type="text" th:field="*{sum}"></td>
+        </tr>
+        <tr><td colspan="3" align="center"><input type="submit" value="Отправить"></td></tr>
+    </form>
+    </tbody>
+</table>
+</body>
+</html>

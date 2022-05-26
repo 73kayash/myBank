@@ -6,35 +6,41 @@
 </head>
 <body>
 <table border="1" bgcolor="#f5f5dc">
-    <thead>
-    <tr>
-        <th align="center" colspan="3"> Look, edit or delete user</th>
-    </tr>
-    <tr>
-        <th> NAME</th>
-        <th> NUMBER</th>
-        <th> BALANCE</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!--/*@thymesVar id="userDto" type="irlix.task.bank.models.dto.user.WorkingUserDto"*/-->
-    <form th:method="PATCH" action="#" th:object="${userDto}">
-        <input type="hidden" th:field="*{user.id}">
-        <tr>
-            <td><input type="text" th:field="*{user.name}"></td>
-            <td><input type="text" th:field="*{user.number}"></td>
-            <td><input type="number" th:field="*{user.balance}"></td>
-        </tr>
-        <tr>
-            <th colspan="3"><input type="submit" value="Edit User"></th>
-        </tr>
-    </form>
-    <form th:method="DELETE" action=#>
-        <tr>
-            <td colspan="3" align="left"><input type="submit" value="Delete User"></td>
-        </tr>
-    </form>
-    </tbody>
+    <td>
+        <table>
+            <thead>
+            <tr>
+                <th align="center" colspan="3"> Look, edit or delete user</th>
+            </tr>
+            <tr>
+                <th> NAME</th>
+                <th> NUMBER</th>
+                <th> BALANCE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--/*@thymesVar id="userDto" type="irlix.task.bank.models.dto.user.WorkingUserDto"*/-->
+            <form th:method="PATCH" action="#" th:object="${userDto}">
+                <input type="hidden" th:field="*{user.id}">
+                <tr>
+                    <td><input type="text" th:field="*{user.name}"></td>
+                    <td><input type="text" th:field="*{user.number}"></td>
+                    <td><input type="number" step="0.01" th:field="*{user.balance}"></td>
+                </tr>
+                <tr>
+                    <th colspan="3"><input type="submit" value="Edit User"></th>
+                </tr>
+            </form>
+            <form th:method="DELETE" action=#>
+                <tr>
+                    <td colspan="3" align="left"><input type="submit" value="Delete User"></td>
+                </tr>
+            </form>
+            </tbody>
+        </table>
+    </td>
+    <td><!--/*@thymesVar id="userDto" type="irlix.task.bank.models.dto.user.WorkingUserDto"*/-->
+    <form th:action="@{/payment/{id}(id = ${userDto.getUser().getId()})}"><input type="submit" value="Выполнить перевод"></form></td>
 </table>
 </body>
 </html>
