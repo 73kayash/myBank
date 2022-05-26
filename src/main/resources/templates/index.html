@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Users </title>
+</head>
+<body>
+
+<table border="1" bgcolor="#f5f5dc">
+    <thead>
+    <tr>
+        <th> ID</th>
+        <th> NAME</th>
+        <th> NUMBER</th>
+        <th> BALANCE</th>
+    </thead>
+    <tbody>
+    <!--/*@thymesVar id="userList" type="irlix.task.bank.models.dto.user.IndexUserDto"*/-->
+    <!--/*@thymesVar id="getUsers" type="irlix.task.bank.models.entity.Usr"*/-->
+    <tr th:each="usr : ${userList.getUsers()}">
+        <td><p th:text="${usr.getId()}"> Product </p></td>
+        <td><a th:href="@{/user/{id}(id=${usr.getId()})}" th:text="${usr.getName()}"> Price </a></td>
+        <td><p th:text="${usr.getNumber()}"> Count </p></td>
+        <td><p th:text="${usr.getBalance()}"></p></td>
+    </tr>
+    <form th:method="POST" action=# th:object="${userList}">
+        <tr>
+            <th colspan="4" align="center"> CREATE NEW USER:</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="text" th:field="*{userForAdd.name}"></td>
+            <td><input type="text" th:field="*{userForAdd.number}"></td>
+            <td><input type="number" th:field="*{userForAdd.balance}"></td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center"><input type="submit" value="Create User"></td>
+        </tr>
+    </form>
+    </tbody>
+</table>
+
+</body>
+
+</html>
