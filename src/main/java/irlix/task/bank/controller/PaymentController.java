@@ -15,7 +15,7 @@ public class PaymentController {
 
     @GetMapping("/{id}")
     public String createPayment(@PathVariable("id") int id, Model model){
-        model.addAttribute("payment", paymentService.getPaymentDto(id));
+        model.addAttribute("payDto", paymentService.getPaymentDto(id));
         return "payment";
     }
 

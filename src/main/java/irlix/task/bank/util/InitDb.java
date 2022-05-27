@@ -29,7 +29,6 @@ public class InitDb {
     public void init() {
         List<Usr> list = new ArrayList<>();
         list.add(new Usr(1, "Сергей", "+79033334533", 45000));
-        list.add(new Usr(2, "Владимир", "+79033334533", 3800));
         list.add(new Usr(3, "Олег", "+79033334533", 54250));
         list.add(new Usr(4, "Михаил", "+79033334533", 11000));
         list.add(new Usr(5, "Ольга", "+79033334533", 43280));

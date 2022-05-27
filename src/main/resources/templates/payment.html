@@ -10,33 +10,35 @@
     <tr>
         <th> Отправитель</th>
         <th> Получатель</th>
-        <th> Cумма </th>
-        <th> </th>
+        <th> Cумма</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
-    <!--/*@thymesVar id="payment" type="irlix.task.bank.models.dto.payment.PaymentDto"*/-->
-    <form th:method="POST" action=# th:object="${payment}" >
-        <input type="hidden" th:field="*{sender}">
-        <tr>
+    <tr>
+        <!--/*@thymesVar id="payDto" type="irlix.task.bank.models.dto.payment.PaymentDto"*/-->
+        <form th:method="POST" action=# th:object="${payDto}">
+            <input type="hidden" th:field="*{sender.id}">
+
             <td>
                 <table>
                     <tr>
-                        <td th:utext="payment.getSender().getId()"></td>
-                        <td th:utext="payment.getSender().getName()">NAME</td>
-                        <td th:utext="payment.getSender().getNumber()">NUMBER</td>
+                        <td th:utext="${payDto.getSender().getName()}">NAME</td>
+                        <td th:utext="${payDto.getSender().getNumber()}">NUMBER</td>
                     </tr>
                 </table>
             </td>
             <td>
                 <select th:field="*{recipient_id}">
-                    <option th:each="user : ${payment.getUsers()}" th:value="user.getId()" th:utext="${user.getName()} + ' ' + ${user.getNumber()}"></option>
+                    <option th:each="user : ${payDto.getUsers()}" th:value="${user.getId()}"
+                            th:utext="${user.getName()} + ' ' + ${user.getNumber()}"></option>
                 </select>
             </td>
             <td><input type="text" th:field="*{sum}"></td>
-        </tr>
-        <tr><td colspan="3" align="center"><input type="submit" value="Отправить"></td></tr>
-    </form>
+
+            <td align="center"><input type="submit" value="Отправить"></td>
+        </form>
+    </tr>
     </tbody>
 </table>
 </body>

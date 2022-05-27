@@ -37,11 +37,17 @@ public class PaymentService {
 
     public void addPayment(PaymentDto dto) {
         Payment payment = new Payment();
+        Usr sender = userRepository.getReferenceById(dto.getSender().getId());
+        Usr recipient = userRepository.getReferenceById(dto.getRecipient_id());
+
+        sender.setBalance(sender.getBalance() - dto.getSum());
+        recipient.setBalance(recipient.getBalance() + dto.getSum());
+
         Date date = Date.valueOf(LocalDate.now());
         payment.setDate(date);
-        payment.setSender(dto.getSender());
+        payment.setSender(sender);
         payment.setSum(dto.getSum());
-        payment.setRecipient(userRepository.getReferenceById(dto.getRecipient_id()));
+        payment.setRecipient(recipient);
 
         repository.save(payment);
     }
