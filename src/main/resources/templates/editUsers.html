@@ -40,7 +40,10 @@
         </table>
     </td>
     <td><!--/*@thymesVar id="userDto" type="irlix.task.bank.models.dto.user.WorkingUserDto"*/-->
-    <form th:action="@{/payment/{id}(id = ${userDto.getUser().getId()})}"><input type="submit" value="Выполнить перевод"></form></td>
+        <form th:action="@{/payment/{id}(id = ${userDto.getUser().getId()})}"><input type="submit"
+                                                                                     value="Выполнить перевод"></form>
+        <form><input type="submit" value="Посмотреть историю"></form>
+    </td>
 </table>
 </body>
 </html>

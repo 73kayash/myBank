@@ -7,11 +7,15 @@
 <body>
 <table border="1" bgcolor="#f5f5dc">
     <thead>
+
+    <!--/*@thymesVar id="payDto" type="irlix.task.bank.models.dto.payment.PaymentDto"*/-->
+    <tr>
+        <th colspan="4" align="center"><h3 th:text="'Баланс: ' + ${payDto.getSender().getBalance()}"/></th>
+    </tr>
     <tr>
         <th> Отправитель</th>
         <th> Получатель</th>
-        <th> Cумма</th>
-        <th></th>
+        <th colspan="2"> Cумма</th>
     </tr>
     </thead>
     <tbody>
