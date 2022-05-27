@@ -1,6 +1,7 @@
 package irlix.task.bank.service;
 
 import irlix.task.bank.models.dto.payment.PaymentDto;
+import irlix.task.bank.models.dto.payment.PaymentHistoryDto;
 import irlix.task.bank.models.entity.Payment;
 import irlix.task.bank.models.entity.Usr;
 import irlix.task.bank.repository.PaymentRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -24,11 +26,15 @@ public class PaymentService {
 
     public PaymentDto getPaymentDto(int id) {
         Usr sender = getOneUser(id);
-        List<Usr> users = userRepository.findAll();
-        users.remove(sender);
-
+        List<Usr> users = getUsersWithoutOwner(id);
 
         return new PaymentDto(sender, users);
+    }
+
+    private List<Usr> getUsersWithoutOwner(int id){
+        List<Usr> users = userRepository.findAll();
+        users.remove(getOneUser(id));
+        return users;
     }
 
     private Usr getOneUser(int id) {
@@ -50,5 +56,28 @@ public class PaymentService {
         payment.setRecipient(recipient);
 
         repository.save(payment);
+    }
+
+    public PaymentHistoryDto getHistoryDto(int id, int filter) {
+        List<Payment> inPay;
+        List<Payment> outPay;
+        List<Payment> allPayments = repository.findAll();
+
+        inPay = allPayments.stream().
+                filter(p -> p.getRecipient().getId() == id).
+                collect(Collectors.toList());
+        outPay = allPayments.stream().
+                filter(payment -> payment.getSender().getId() == id).
+                collect(Collectors.toList());
+
+        if(filter != 0){
+            inPay = inPay.stream().
+                    filter(p -> p.getSender().getId() == filter).
+                    collect(Collectors.toList());
+            outPay = outPay.stream().
+                    filter(payment -> payment.getRecipient().getId() == filter).
+                    collect(Collectors.toList());
+        }
+        return new PaymentHistoryDto(inPay, outPay, getUsersWithoutOwner(id), filter);
     }
 }

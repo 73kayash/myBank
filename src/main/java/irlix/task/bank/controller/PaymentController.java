@@ -25,4 +25,10 @@ public class PaymentController {
         return "redirect:/user";
     }
 
+    @GetMapping("/history/{id}")
+    public String historyPayment(@PathVariable("id") int id, Model model, @RequestParam(name = "filter_id" , defaultValue = "0") int filter) {
+        model.addAttribute("payments", paymentService.getHistoryDto(id, filter));
+        return "history";
+    }
+
 }
