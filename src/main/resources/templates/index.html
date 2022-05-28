@@ -5,7 +5,6 @@
     <title> Users </title>
 </head>
 <body>
-
 <table border="1" bgcolor="#f5f5dc">
     <thead>
     <tr>
@@ -23,15 +22,22 @@
         <td><p th:text="${usr.getNumber()}"> Count </p></td>
         <td><p th:text="${usr.getBalance()}"></p></td>
     </tr>
-    <form th:method="POST" action=# th:object="${userList}">
+    <!--/*@thymesVar id="newUser" type="irlix.task.bank.models.dto.user.UserCreateEditDto"*/-->
+    <form th:method="POST" action=# th:object="${newUser}">
         <tr>
             <th colspan="4" align="center"> CREATE NEW USER:</th>
         </tr>
         <tr>
             <td></td>
-            <td><input type="text" th:field="*{userForAdd.name}"></td>
-            <td><input type="text" th:field="*{userForAdd.number}"></td>
-            <td><input type="number" th:field="*{userForAdd.balance}"></td>
+            <td><input type="text" th:field="*{name}"></td>
+            <td><input type="text" th:field="*{number}"></td>
+            <td><input type="number" th:field="*{balance}"></td>
+        </tr>
+        <tr th:if="${#fields.hasErrors()}" style="color: crimson">
+            <td></td>
+            <td><b th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></b></td>
+            <td><b th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></b></td>
+            <td><b th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"></b></td>
         </tr>
         <tr>
             <td colspan="4" align="center"><input type="submit" value="Create User"></td>

@@ -1,11 +1,11 @@
 package irlix.task.bank.service;
 
 import irlix.task.bank.models.dto.user.IndexUserDto;
-import irlix.task.bank.models.dto.user.WorkingUserDto;
+import irlix.task.bank.models.dto.user.UserCreateEditDto;
 import irlix.task.bank.models.entity.Usr;
 import irlix.task.bank.repository.UsrRepository;
 import lombok.AllArgsConstructor;
-import org.jetbrains.annotations.NotNull;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -15,11 +15,14 @@ public class UserService {
     private final UsrRepository repository;
 
     public IndexUserDto getAllUserDto(){
-        return new IndexUserDto(repository.findAll(), new Usr());
+        return new IndexUserDto(repository.findAll());
     }
 
-    public void saveNewUser(@NotNull IndexUserDto userDto) {
-        Usr user = userDto.getUserForAdd();
+    public void saveNewUser(UserCreateEditDto userDto) {
+        Usr user = new Usr();
+        user.setName(userDto.getName());
+        user.setNumber(userDto.getNumber());
+        user.setBalance(userDto.getBalance());
         repository.save(user);
     }
 
@@ -27,12 +30,17 @@ public class UserService {
         return repository.findById(id).get();
     }
 
-    public WorkingUserDto getOneUserDto(int id) {
-        return new WorkingUserDto(getOneUser(id));
+    public UserCreateEditDto getOneUserDto(int id) {
+        Usr user = getOneUser(id);
+        return new UserCreateEditDto(user.getName(), user.getNumber(), user.getBalance());
     }
 
-    public void editUser(WorkingUserDto userDto) {
-        repository.save(userDto.getUser());
+    public void editUser(UserCreateEditDto userDto, int id) {
+        Usr user = getOneUser(id);
+        user.setBalance(userDto.getBalance());
+        user.setName(userDto.getName());
+        user.setBalance(userDto.getBalance());
+        repository.save(user);
     }
 
     public void deleteUser(int id) {

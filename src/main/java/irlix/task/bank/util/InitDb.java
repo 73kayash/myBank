@@ -31,12 +31,6 @@ public class InitDb {
         list.add(new Usr(1, "Сергей", "+79033334533", 45000));
         list.add(new Usr(3, "Олег", "+79033334533", 54250));
         list.add(new Usr(4, "Михаил", "+79033334533", 11000));
-        list.add(new Usr(5, "Ольга", "+79033334533", 43280));
-        list.add(new Usr(6, "Ирина", "+79033334533", 65465));
-        list.add(new Usr(7, "Юлия", "+79033334533", 651));
-        list.add(new Usr(8, "Николай", "+79033334533", 8468468));
-        list.add(new Usr(9, "Михаил", "+79033334533", 486));
-        list.add(new Usr(10, "Валерия", "+79033334533", 31356));
 
         for (Usr user : list) {
             if (!repository.existsById(user.getId())) {

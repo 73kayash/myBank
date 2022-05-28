@@ -5,6 +5,7 @@
     <title>История переводов</title>
 </head>
 <body>
+<form th:action="@{/user}" action=""><input type="submit" value="Домой!"></form>
 <table border="1" bgcolor="#f5f5dc">
     <!--/*@thymesVar id="payments" type="irlix.task.bank.models.dto.payment.PaymentHistoryDto"*/-->
     <thead>
@@ -39,7 +40,7 @@
                 </tr>
                 <tr th:each="inPay : ${payments.getInPay()}">
                     <!--/*@thymesVar id="inPay" type="irlix.task.bank.models.entity.Payment"*/-->
-                    <td th:utext="${inPay.getSum()}"></td>
+                    <td style="color: #408600" th:utext="${inPay.getSum()}"></td>
                     <td th:utext="${inPay.getSender().getName()} + ' ' + ${inPay.getSender().getNumber()}"></td>
                 </tr>
             </table>
@@ -52,7 +53,7 @@
                 </tr>
                 <tr th:each="inPay : ${payments.getOutPay()}">
                     <!--/*@thymesVar id="inPay" type="irlix.task.bank.models.entity.Payment"*/-->
-                    <td th:utext="${inPay.getSum()}"></td>
+                    <td style="color: crimson" th:utext="${inPay.getSum()}"></td>
                     <td th:utext="${inPay.getRecipient().getName()} + ' ' + ${inPay.getRecipient().getNumber()}"></td>
                 </tr>
             </table>

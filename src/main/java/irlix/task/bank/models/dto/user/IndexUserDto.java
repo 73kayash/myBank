@@ -14,5 +14,4 @@ import java.util.List;
 @AllArgsConstructor
 public class IndexUserDto {
     private List<Usr> users;
-    private Usr userForAdd;
 }

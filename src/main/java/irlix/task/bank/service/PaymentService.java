@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingErrorProcessor;
+import org.springframework.validation.BindingResult;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -41,9 +43,9 @@ public class PaymentService {
         return userRepository.findById(id).get();
     }
 
-    public void addPayment(PaymentDto dto) {
+    public void addPayment(PaymentDto dto, int id) {
         Payment payment = new Payment();
-        Usr sender = userRepository.getReferenceById(dto.getSender().getId());
+        Usr sender = userRepository.getReferenceById(id);
         Usr recipient = userRepository.getReferenceById(dto.getRecipient_id());
 
         sender.setBalance(sender.getBalance() - dto.getSum());
@@ -79,5 +81,13 @@ public class PaymentService {
                     collect(Collectors.toList());
         }
         return new PaymentHistoryDto(inPay, outPay, getUsersWithoutOwner(id), filter);
+    }
+
+    public BindingResult getAllowPayment(BindingResult bindingResult, PaymentDto paymentDto) {
+        if(paymentDto.getBalance()-paymentDto.getSum() > 0){
+            return bindingResult;
+        }
+        bindingResult.rejectValue("sum", "Not Enough Cash", "Недостаточно средств для перевода");
+        return bindingResult;
     }
 }
