@@ -1,10 +1,8 @@
 package irlix.task.bank.models.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jdk.jshell.Snippet;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Usr {
     @Id
@@ -25,4 +24,5 @@ public class Usr {
     private String name;
     private String number;
     private float balance;
+
 }

@@ -1,11 +1,10 @@
 package irlix.task.bank.service;
 
-import irlix.task.bank.models.dto.user.IndexUserDto;
+import irlix.task.bank.models.dto.user.ListUsersDto;
 import irlix.task.bank.models.dto.user.UserCreateEditDto;
 import irlix.task.bank.models.entity.Usr;
 import irlix.task.bank.repository.UsrRepository;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -14,8 +13,8 @@ public class UserService {
     //private final UserRepository repository;
     private final UsrRepository repository;
 
-    public IndexUserDto getAllUserDto(){
-        return new IndexUserDto(repository.findAll());
+    public ListUsersDto getAllUserDto() {
+        return new ListUsersDto(repository.findAll());
     }
 
     public void saveNewUser(UserCreateEditDto userDto) {
@@ -26,8 +25,8 @@ public class UserService {
         repository.save(user);
     }
 
-    private Usr getOneUser(int id){
-        return repository.findById(id).get();
+    private Usr getOneUser(int id) {
+        return repository.getReferenceById(id);
     }
 
     public UserCreateEditDto getOneUserDto(int id) {
@@ -39,7 +38,8 @@ public class UserService {
         Usr user = getOneUser(id);
         user.setBalance(userDto.getBalance());
         user.setName(userDto.getName());
-        user.setBalance(userDto.getBalance());
+        user.setNumber(userDto.getNumber()
+        );
         repository.save(user);
     }
 

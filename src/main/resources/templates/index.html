@@ -14,7 +14,7 @@
         <th> BALANCE</th>
     </thead>
     <tbody>
-    <!--/*@thymesVar id="userList" type="irlix.task.bank.models.dto.user.IndexUserDto"*/-->
+    <!--/*@thymesVar id="userList" type="irlix.task.bank.models.dto.user.ListUsersDto"*/-->
     <!--/*@thymesVar id="getUsers" type="irlix.task.bank.models.entity.Usr"*/-->
     <tr th:each="usr : ${userList.getUsers()}">
         <td><p th:text="${usr.getId()}"> Product </p></td>

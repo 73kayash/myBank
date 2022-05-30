@@ -1,6 +1,7 @@
 package irlix.task.bank.models.dto.user;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserCreateEditDto {
     @Size(min = 2, max = 15, message = "Длина имени далжна находиться в диапазоне от 2 до 15 символов!")
     @Pattern(regexp = "[А-Яа-яA-Za-z]", message = "Имя должно состоять из букв")

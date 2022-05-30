@@ -1,9 +1,8 @@
 package irlix.task.bank.controller;
 
 
-import irlix.task.bank.models.dto.user.IndexUserDto;
+import irlix.task.bank.models.dto.user.ListUsersDto;
 import irlix.task.bank.models.dto.user.UserCreateEditDto;
-import irlix.task.bank.models.dto.user.WorkingUserDto;
 import irlix.task.bank.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,7 @@ public class UserController {
 
     @GetMapping()
     public String index(Model model) {
-        IndexUserDto userList = service.getAllUserDto();
+        ListUsersDto userList = service.getAllUserDto();
         model.addAttribute("userList", userList);
         model.addAttribute("newUser", new UserCreateEditDto());
         return "index";
@@ -30,7 +29,7 @@ public class UserController {
     @PostMapping()
     public String addNewUser(@ModelAttribute("newUser") @Valid UserCreateEditDto userDto, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
-            IndexUserDto userList = service.getAllUserDto();
+            ListUsersDto userList = service.getAllUserDto();
             model.addAttribute("userList", userList);
             return "index";
         }

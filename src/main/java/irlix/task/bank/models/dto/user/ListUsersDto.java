@@ -2,16 +2,14 @@ package irlix.task.bank.models.dto.user;
 
 
 import irlix.task.bank.models.entity.Usr;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
-public class IndexUserDto {
+public class ListUsersDto {
     private List<Usr> users;
 }
