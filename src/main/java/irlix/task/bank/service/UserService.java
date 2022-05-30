@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class UserService {
-    //private final UserRepository repository;
     private final UsrRepository repository;
 
     public ListUsersDto getAllUserDto() {
